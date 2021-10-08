@@ -1,6 +1,8 @@
 
 const express = require('express')
 
+const useSocket = require('socket.io')
+
 const app = express()
 
 const rooms = {
