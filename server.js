@@ -1,9 +1,9 @@
 
 const express = require('express')
 
-const useSocket = require('socket.io')
-
 const app = express()
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
 
 const rooms = {
     id:[],
@@ -14,6 +14,10 @@ app.get('/vlad', (req,res) =>{
     res.json(rooms)
 })
 
-app.listen(9999,()=>{
+io.on('connection', socket =>{
+    console.log('socket connected', socket)
+})
+
+server.listen(9999,()=>{
     console.log('hey')
 })
