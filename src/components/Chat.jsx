@@ -18,7 +18,10 @@ function Chat({users, messages, name, roomId, onAddMessage}) {
     useEffect(() => {
         messagesRef.current.scrollTo(0, 99999);
     }, [messages]);
+
     console.log(users)
+    console.log(name)
+    console.log(roomId)
 
     return (
         <div className="chat">
@@ -44,13 +47,14 @@ function Chat({users, messages, name, roomId, onAddMessage}) {
                     ))}
                 </div>
                 <form>
-                         <textarea
+                    <textarea
                       value={messageValue}
                       onChange={(e) => setMessageValue(e.target.value)}
                       className="form-control"
-                      rows="3"></textarea>
+                      rows="3">
+                    </textarea>
                     <button onClick={onSendMessage} type="button" className="btn btn-primary">
-                        Отправить
+                        Send
                     </button>
                 </form>
             </div>

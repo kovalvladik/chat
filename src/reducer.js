@@ -18,7 +18,7 @@ export default (state, action) => {
         case 'SET_USERS':
             return {
                 ...state,
-                users: action.payload,
+                users:[...state.users,action.payload],
             };
 
         case 'NEW_MESSAGE':

@@ -33,6 +33,7 @@ function App() {
             type: 'SET_USERS',
             payload: users,
         });
+        console.log('yyyy', users)
     };
 
     const addMessage = (message) => {
@@ -44,9 +45,8 @@ function App() {
 
     useEffect(() => {
         socket.on('ROOM:SET_USERS', setUsers);
-        console.log(state.users)
         socket.on('ROOM:NEW_MESSAGE', addMessage);
-    }, []);
+    }, [state.joined]);
 
     window.socket = socket;
 
