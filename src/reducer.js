@@ -4,7 +4,7 @@ export default (state, action) => {
             return {
                 ...state,
                 joined: true,
-                userName: action.payload.userName,
+                name: action.payload.name,
                 roomId: action.payload.roomId,
             };
 

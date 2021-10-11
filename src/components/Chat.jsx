@@ -1,23 +1,24 @@
 import React, {useEffect, useRef, useState} from 'react';
 import socket from '../socket';
 
-function Chat({users, messages, userName, roomId, onAddMessage}) {
+function Chat({users, messages, name, roomId, onAddMessage}) {
     const [messageValue, setMessageValue] = useState('');
     const messagesRef = useRef(null);
 
     const onSendMessage = () => {
         socket.emit('ROOM:NEW_MESSAGE', {
-            userName,
+            name,
             roomId,
             text: messageValue,
         });
-        onAddMessage({userName, text: messageValue});
+        onAddMessage({name, text: messageValue});
         setMessageValue('');
     };
 
     useEffect(() => {
         messagesRef.current.scrollTo(0, 99999);
     }, [messages]);
+    console.log(users)
 
     return (
         <div className="chat">
@@ -37,7 +38,7 @@ function Chat({users, messages, userName, roomId, onAddMessage}) {
                         <div className="message">
                             <p>{message.text}</p>
                             <div>
-                                <span>{message.userName}</span>
+                                <span>{message.name}</span>
                             </div>
                         </div>
                     ))}

@@ -10,7 +10,7 @@ function App() {
     const [state, dispatch] = useReducer(reducer, {
         joined: false,
         roomId: null,
-        userName: null,
+        name: null,
         users: [],
         messages: [],
     });
@@ -44,6 +44,7 @@ function App() {
 
     useEffect(() => {
         socket.on('ROOM:SET_USERS', setUsers);
+        console.log(state.users)
         socket.on('ROOM:NEW_MESSAGE', addMessage);
     }, []);
 
@@ -51,11 +52,7 @@ function App() {
 
     return (
         <div>
-            {!state.joined ? (
-                <Join onLogin={onLogin}/>
-            ) : (
-                <Chat {...state} onAddMessage={addMessage}/>
-            )}
+            {!state.joined ? <Join onLogin={onLogin}/> :<Chat {...state} onAddMessage={addMessage}/>}
         </div>
 
     );
