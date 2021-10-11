@@ -46,7 +46,7 @@ function App() {
     useEffect(() => {
         socket.on('ROOM:SET_USERS', setUsers);
         socket.on('ROOM:NEW_MESSAGE', addMessage);
-    }, [state.joined]);
+    }, []);
 
     window.socket = socket;
 
