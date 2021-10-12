@@ -23,6 +23,7 @@ function App() {
             payload: obj,
         });
         socket.emit('ROOM:JOIN', obj);
+        //тут прихлдят данные по юзерам и сообщениям
         const {data} = await axios.get(`/rooms/${obj.roomId}`);
         dispatch({
             type: 'SET_DATA',
@@ -35,7 +36,6 @@ function App() {
             type: 'SET_USERS',
             payload: users,
         });
-        console.log('yyyy', users)
     };
 // добавление сообщения
     const addMessage = (message) => {

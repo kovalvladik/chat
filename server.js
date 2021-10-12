@@ -36,22 +36,27 @@ io.on('connection', (socket) => {
         socket.join(roomId)
         rooms.get(roomId).get('users').set(socket.id, name)
         const users = [...rooms.get(roomId).get('users').values()]
-        socket.to(roomId).emit('ROOM:JOINED', users)
+        // а тут не работает нормально сокет по юрезам :(
+        socket.broadcast.to(roomId).emit('ROOM:JOINED', users)
+        console.log(roomId,'eeeeea',users)
     })
+
     socket.on('ROOM:NEW_MESSAGE', ({roomId, name, text}) => {
         const obj = {
             name,
             text,
         };
         rooms.get(roomId).get('messages').push(obj)
-        socket.to(roomId).emit('ROOM:NEW_MESSAGE', obj)
+        // и тут работает
+        socket.broadcast.to(roomId).emit('ROOM:NEW_MESSAGE', obj)
     });
 
     socket.on('disconnect', () => {
         rooms.forEach((value, roomId) => {
             if (value.get('users').delete(socket.id)) {
                 const users = [...value.get('users').values()]
-                socket.to(roomId).emit('ROOM:SET_USERS', users)
+                //а тут работает
+                socket.broadcast.to(roomId).emit('ROOM:SET_USERS', users)
             }
         });
     });

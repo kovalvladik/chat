@@ -19,16 +19,12 @@ function Chat({users, messages, name, roomId, onAddMessage}) {
         messagesRef.current.scrollTo(0, 99999);
     }, [messages]);
 
-    console.log(users)
-    console.log(name)
-    console.log(roomId)
-
     return (
         <div className="chat">
             <div className="chat-users">
                 Комната: <b>{roomId}</b>
                 <hr/>
-                <b>Онлайн ({users.length}):</b>
+                <b>Онлайн : {users.length}</b>
                 <ul>
                     {users.map((name, index) => (
                         <li key={name + index}>{name}</li>
@@ -38,11 +34,17 @@ function Chat({users, messages, name, roomId, onAddMessage}) {
             <div className="chat-messages">
                 <div ref={messagesRef} className="messages">
                     {messages.map((message) => (
-                        <div key={  Date.now()} className="message">
-                            <p>{message.text}</p>
-                            <div>
+                        <div  className="message">
+                            {message.event === 'connection'?<div> tyta {message.name}
+                            </div>: <div>
+                                <p>{message.text}</p>
+                                <div>
                                 <span>{message.name} </span>
+                                </div>
                             </div>
+
+                            }
+
                         </div>
                     ))}
                 </div>
