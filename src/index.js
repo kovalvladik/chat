@@ -6,7 +6,6 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Join from "./components/Join";
 import Chat from "./components/Chat";
 import Main from "./pages/Main";
-import Room from "./pages/Room";
 
 ReactDOM.render(
     <React.StrictMode>
