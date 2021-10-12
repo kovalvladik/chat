@@ -14,7 +14,7 @@ function App() {
         name: null,
         users: [],
         messages: [],
-        time : null,
+        time: null,
     });
 
     const onLogin = async (obj) => {
@@ -54,7 +54,7 @@ function App() {
 
     return (
         <div className="wrapper">
-            {!state.joined ? <Join onLogin={onLogin}/> :<Chat {...state} onAddMessage={addMessage}/>}
+            {!state.joined ? <Join onLogin={onLogin}/> : <Chat {...state} onAddMessage={addMessage}/>}
         </div>
 
     );

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from "axios";
-
+import {Link} from 'react-router-dom'
 const Join = ({onLogin}) => {
     const [roomId, setRoomId] = useState('')
     const [name, setName] = useState('')
@@ -27,7 +27,8 @@ const Join = ({onLogin}) => {
             <div>
                 <input placeholder={' name'} value={name} onChange={event => setName(event.target.value)}/>
             </div>
-            <button disabled={isLoading} onClick={onEnter} className="btn btn-success" >
+            <button disabled={isLoading} onClick={onEnter} className="btn btn-success"
+                    component={Link} to={`/room/${roomId}`} >
                 {isLoading ? 'Вход...' : 'Войти'}
 
             </button>

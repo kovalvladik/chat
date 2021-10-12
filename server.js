@@ -38,8 +38,8 @@ io.on('connection', (socket) => {
         rooms.get(roomId).get('users').set(socket.id, name)
         const users = [...rooms.get(roomId).get('users').values()]
         // а тут не работает нормально сокет по юрезам :(
-        socket.broadcast.to(roomId).emit('ROOM:JOINED', users)
-        console.log(roomId,'eeeeea',users)
+        socket.broadcast.emit('ROOM:JOINED', users)
+        console.log(roomId, 'eeeeea', users)
     })
 
     socket.on('ROOM:NEW_MESSAGE', ({roomId, name, text}) => {
@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
         };
         rooms.get(roomId).get('messages').push(obj)
         // и тут работает
-        socket.broadcast.to(roomId).emit('ROOM:NEW_MESSAGE', obj)
+        socket.to(roomId).emit('ROOM:NEW_MESSAGE', obj)
     });
 
     socket.on('disconnect', () => {
@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
             if (value.get('users').delete(socket.id)) {
                 const users = [...value.get('users').values()]
                 //а тут работает
-                socket.broadcast.to(roomId).emit('ROOM:SET_USERS', users)
+                socket.to(roomId).emit('ROOM:SET_USERS', users)
             }
         });
     });
@@ -65,5 +65,5 @@ io.on('connection', (socket) => {
 })
 // порт нод сервера
 server.listen(9000, () => {
-    console.log('hey')
+    console.log('i`m ALIIIIVE')
 })
