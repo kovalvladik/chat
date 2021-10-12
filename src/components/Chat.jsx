@@ -4,7 +4,7 @@ import socket from '../socket';
 function Chat({users, messages, name, roomId, onAddMessage}) {
     const [messageValue, setMessageValue] = useState('');
     const messagesRef = useRef(null);
-
+// отправка сообщения
     const onSendMessage = () => {
         socket.emit('ROOM:NEW_MESSAGE', {
             name,
@@ -14,7 +14,7 @@ function Chat({users, messages, name, roomId, onAddMessage}) {
         onAddMessage({name, text: messageValue});
         setMessageValue('');
     };
-
+//  обновление сообщений
     useEffect(() => {
         messagesRef.current.scrollTo(0, 99999);
     }, [messages]);
@@ -38,10 +38,10 @@ function Chat({users, messages, name, roomId, onAddMessage}) {
             <div className="chat-messages">
                 <div ref={messagesRef} className="messages">
                     {messages.map((message) => (
-                        <div className="message">
+                        <div key={  Date.now()} className="message">
                             <p>{message.text}</p>
                             <div>
-                                <span>{message.name}</span>
+                                <span>{message.name} </span>
                             </div>
                         </div>
                     ))}

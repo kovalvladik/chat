@@ -7,12 +7,14 @@ import Chat from "./components/Chat";
 
 
 function App() {
+    // начальный стейт
     const [state, dispatch] = useReducer(reducer, {
         joined: false,
         roomId: null,
         name: null,
         users: [],
         messages: [],
+        time : null,
     });
 
     const onLogin = async (obj) => {
@@ -27,7 +29,7 @@ function App() {
             payload: data,
         });
     };
-
+//
     const setUsers = (users) => {
         dispatch({
             type: 'SET_USERS',
@@ -35,14 +37,14 @@ function App() {
         });
         console.log('yyyy', users)
     };
-
+// добавление сообщения
     const addMessage = (message) => {
         dispatch({
             type: 'NEW_MESSAGE',
             payload: message,
         });
     };
-
+// сетаем юзеров и сообщения при монтировании
     useEffect(() => {
         socket.on('ROOM:SET_USERS', setUsers);
         socket.on('ROOM:NEW_MESSAGE', addMessage);

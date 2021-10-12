@@ -1,13 +1,13 @@
 const express = require('express')
-
+// базовые настройки сервера на экспрессе
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
 app.use(express.json())
-
+// создаем элемент мап для удобства работы
 const rooms = new Map()
-
+// выдача юзеров и сообщения в комнате
 app.get('/rooms/:id', (req, res) => {
     const {id: roomId} = req.params
     const obj = rooms.has(roomId) ? {
@@ -16,7 +16,7 @@ app.get('/rooms/:id', (req, res) => {
     } : {users: [], messages: []}
     res.json(obj)
 })
-
+// создание или вход в существеющую комнату
 app.post('/rooms', (req, res) => {
     const {roomId, name} = req.body
     if (!rooms.has(roomId)) {
@@ -30,7 +30,7 @@ app.post('/rooms', (req, res) => {
     }
     res.send()
 })
-
+//
 io.on('connection', (socket) => {
     socket.on('ROOM:JOIN', ({roomId, name}) => {
         socket.join(roomId)
@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
     });
     console.log('connection', socket.id)
 })
-
+// порт нод сервера
 server.listen(9000, () => {
     console.log('hey')
 })

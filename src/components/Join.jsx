@@ -6,7 +6,7 @@ const Join = ({onLogin}) => {
     const [roomId, setRoomId] = useState('')
     const [name, setName] = useState('')
     const [isLoading, setLoading] = React.useState(false);
-
+// проверка на пустые поля и пост запрос на сервер
     const onEnter = async () => {
         if (!roomId || !name) {
             return alert('Неверные данные');
