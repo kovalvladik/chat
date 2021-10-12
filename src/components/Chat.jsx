@@ -35,16 +35,10 @@ function Chat({users, messages, name, roomId, onAddMessage}) {
                 <div ref={messagesRef} className="messages">
                     {messages.map((message) => (
                         <div  className="message">
-                            {message.event === 'connection'?<div> tyta {message.name}
-                            </div>: <div>
                                 <p>{message.text}</p>
                                 <div>
                                 <span>{message.name} </span>
                                 </div>
-                            </div>
-
-                            }
-
                         </div>
                     ))}
                 </div>

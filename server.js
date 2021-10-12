@@ -1,3 +1,4 @@
+// const path = require('path')
 const express = require('express')
 // базовые настройки сервера на экспрессе
 const app = express()

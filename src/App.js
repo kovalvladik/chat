@@ -53,7 +53,7 @@ function App() {
     window.socket = socket;
 
     return (
-        <div>
+        <div className="wrapper">
             {!state.joined ? <Join onLogin={onLogin}/> :<Chat {...state} onAddMessage={addMessage}/>}
         </div>
 

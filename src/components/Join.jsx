@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import socket from "../socket";
 import axios from "axios";
 
 const Join = ({onLogin}) => {
@@ -21,14 +20,14 @@ const Join = ({onLogin}) => {
     };
 
     return (
-        <div>
+        <div className="join-block">
             <div>
                 <input placeholder={'room id'} value={roomId} onChange={event => setRoomId(event.target.value)}/>
             </div>
             <div>
                 <input placeholder={' name'} value={name} onChange={event => setName(event.target.value)}/>
             </div>
-            <button disabled={isLoading} onClick={onEnter} >
+            <button disabled={isLoading} onClick={onEnter} className="btn btn-success" >
                 {isLoading ? 'Вход...' : 'Войти'}
 
             </button>
